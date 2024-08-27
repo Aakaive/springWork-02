@@ -4,6 +4,7 @@ import com.sparta.springwork02.dto.ScheduleRequestDto;
 import com.sparta.springwork02.dto.ScheduleResponseDto;
 import com.sparta.springwork02.entity.Schedule;
 import com.sparta.springwork02.repository.ScheduleRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +49,21 @@ public class ScheduleService {
         schedule.setDescription(requestDto.getDescription());
 
         return scheduleRepository.save(schedule).getId();
+    }
+
+    public ResponseEntity<Void> deleteSchedule(Long id) {
+        try {
+            scheduleRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(404).build();
+        }
+    }
+
+    public ScheduleResponseDto findScheduleById(Long id) {
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Schedule not found")
+        );
+        return new ScheduleResponseDto(schedule);
     }
 }
