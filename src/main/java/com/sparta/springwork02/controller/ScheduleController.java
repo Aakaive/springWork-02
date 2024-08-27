@@ -28,4 +28,9 @@ public class ScheduleController {
         ScheduleResponseDto responseDto = scheduleService.saveSchedule(requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public Long updateSchedule(@PathVariable("id") Long id, @RequestBody ScheduleRequestDto requestDto){
+        return scheduleService.updateSchedule(id, requestDto);
+    }
 }

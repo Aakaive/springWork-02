@@ -36,4 +36,17 @@ public class ScheduleService {
 
         return new ScheduleResponseDto(savedSchedule);
     }
+
+    public Long updateSchedule(Long id, ScheduleRequestDto requestDto) {
+
+        Schedule schedule = scheduleRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Schedule not found")
+        );
+
+        schedule.setUsername(requestDto.getUsername());
+        schedule.setTitle(requestDto.getTitle());
+        schedule.setDescription(requestDto.getDescription());
+
+        return scheduleRepository.save(schedule).getId();
+    }
 }

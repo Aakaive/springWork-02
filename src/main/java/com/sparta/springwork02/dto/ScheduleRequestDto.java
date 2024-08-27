@@ -3,8 +3,6 @@ package com.sparta.springwork02.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Getter
 @NoArgsConstructor
 public class ScheduleRequestDto {
