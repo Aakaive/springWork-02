@@ -1,5 +1,6 @@
 package com.sparta.springwork02.controller;
 
+import com.sparta.springwork02.dto.OneScheduleResponseDto;
 import com.sparta.springwork02.dto.ScheduleRequestDto;
 import com.sparta.springwork02.dto.ScheduleResponseDto;
 import com.sparta.springwork02.entity.Schedule;
@@ -33,7 +34,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/{id}")
-    public ScheduleResponseDto findScheduleById(@PathVariable("id") Long id){
+    public OneScheduleResponseDto findScheduleById(@PathVariable("id") Long id){
         return scheduleService.findScheduleById(id);
     }
 

@@ -30,7 +30,7 @@ public class Schedule extends Timestamped {
     private List<Comment> comments = new ArrayList<>();
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User createdBy;

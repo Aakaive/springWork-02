@@ -1,5 +1,6 @@
 package com.sparta.springwork02.service;
 
+import com.sparta.springwork02.dto.OneScheduleResponseDto;
 import com.sparta.springwork02.dto.ScheduleRequestDto;
 import com.sparta.springwork02.dto.ScheduleResponseDto;
 import com.sparta.springwork02.entity.Schedule;
@@ -87,10 +88,10 @@ public class ScheduleService {
         }
     }
 
-    public ScheduleResponseDto findScheduleById(Long id) {
+    public OneScheduleResponseDto findScheduleById(Long id) {
         Schedule schedule = scheduleRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("Schedule not found")
         );
-        return new ScheduleResponseDto(schedule);
+        return new OneScheduleResponseDto(schedule);
     }
 }
