@@ -4,6 +4,9 @@ import com.sparta.springwork02.dto.ScheduleRequestDto;
 import com.sparta.springwork02.dto.ScheduleResponseDto;
 import com.sparta.springwork02.entity.Schedule;
 import com.sparta.springwork02.repository.ScheduleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,13 @@ public class ScheduleService {
 
     public ScheduleService(ScheduleRepository scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
+    }
+
+    public Page<ScheduleResponseDto> getSchedules(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Schedule> schedules = scheduleRepository.findAllByOrderByModifiedAtDesc(pageable);
+
+        return schedules.map(schedule -> new ScheduleResponseDto(schedule));
     }
 
     public List<ScheduleResponseDto> findAllSchedule() {

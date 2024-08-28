@@ -5,6 +5,7 @@ import com.sparta.springwork02.dto.ScheduleResponseDto;
 import com.sparta.springwork02.entity.Schedule;
 import com.sparta.springwork02.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,14 @@ import java.util.List;
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
+
+
+    @GetMapping("/page")
+    public Page<ScheduleResponseDto> getSchedules(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return scheduleService.getSchedules(page, size);
+    }
 
     @GetMapping
     public List<ScheduleResponseDto> findAllSchedule(){
